@@ -18,33 +18,12 @@ Our team had an exciting time working on this project and hope to share our insi
 
 | Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
 | :------------ |:---------------:| :-----| :-----|
-| IAN TAN ENG KIONG | A0120534W | Investigated the implementation of GA route optimisation using modified-TSP for open route by fixing the start and end of the genes of each chromosome. Testing. 
-Establish value proposition, skeletion of project report, and overall project report writeup. User Guide.
-|  |
-| KHOO WEE BENG | A0195308Y | Exploration of possible solutions, GA(Python+Javascript), Java J2EE(Optaplanner), GoogleMap APIs, OneMap APIs. Front-end development, integration to OneMap and GoogleMap, integration to CLIPS, integration to GA-Python, integration to Javascript-GA.
-Demo Video.
-Overall report refinement and confirmation. 
-|  |
-| KOH SOOK BING | A0195413E | Develop python scripts to download the Geocode location for all the petrol kiosks in Singapore using Google API and OneMap API
-Develop the rule-based engine in Clips to recommend the petrol brand based on the cards discount
-Project report write up(CLIPS)
-|  |
-| RANA BHATTACHARJEE | A0195178N | Investigated the viability of implementing route optimisation using Optaplanner.
-Investigated the implementation of GA route optimisation using modified-TSP approach
-Project report writeup(GA).
-|  |
-| TAN YAO TAI TEERAPONG | A0073460L | Develop python scripts to datamine
-•	credit card discounts from the different banks
-•	address of all Petrol Stations in Singapore
-Develop scripts to Geocode all the address of all the Petrol Stations using One Map API
-Develop Javascript to optimise the “Fixed Route” option.
-Integration of Javascript to Django, One Map and Google Maps
-Project report writeup(JS fixed route).
-|  |
-| YEO WHYE CHUNG NELSON | A0195405A | Investigated the viability of implementing route optimisation using Optaplanner.
-Investigated the implementation of GA route optimisation using node assignment approach
-Project report writeup(Optaplanner).
-|  |
+| IAN TAN ENG KIONG | A0120534W | Investigated the implementation of GA route optimisation using modified-TSP for open route by fixing the start and end of the genes of each chromosome. Testing. Establish value proposition, skeletion of project report, and overall project report writeup. User Guide. |  |
+| KHOO WEE BENG | A0195308Y | Exploration of possible solutions, GA(Python+Javascript), Java J2EE(Optaplanner), GoogleMap APIs, OneMap APIs. Front-end development, integration to OneMap and GoogleMap, integration to CLIPS, integration to GA-Python, integration to Javascript-GA. Demo Video. Overall report refinement and confirmation. |  |
+| KOH SOOK BING | A0195413E | Develop python scripts to download the Geocode location for all the petrol kiosks in Singapore using Google API and OneMap API. Develop the rule-based engine in Clips to recommend the petrol brand based on the cards discount. Project report write up(CLIPS). |  |
+| RANA BHATTACHARJEE | A0195178N | Investigated the viability of implementing route optimisation using Optaplanner. Investigated the implementation of GA route optimisation using modified-TSP approach. Project report writeup(GA). |  |
+| TAN YAO TAI TEERAPONG | A0073460L | Develop python scripts to datamine •	credit card discounts from the different banks •	address of all Petrol Stations in Singapore. Develop scripts to Geocode all the address of all the Petrol Stations using One Map API. Develop Javascript to optimise the “Fixed Route” option. Integration of Javascript to Django, One Map and Google Maps. Project report writeup(JS fixed route). |  |
+| YEO WHYE CHUNG NELSON | A0195405A | Investigated the viability of implementing route optimisation using Optaplanner. Investigated the implementation of GA route optimisation using node assignment approach. Project report writeup(Optaplanner). |  |
 
 ---
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
