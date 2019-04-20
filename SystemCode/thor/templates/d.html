@@ -1,0 +1,398 @@
+<html lang="en"><head>
+  <title>New OneMap: Advanced Mini-Map</title>
+  <link rel="icon" type="image/png" href="https://web-static.onemap.sg/images/main/misc/onemapNew_512.png">
+  <link rel="shortcut icon" type="image/png" href="https://web-static.onemap.sg/images/main/misc/onemapNew_512.png">
+  <!-- Meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- JQuery -->
+  <script defer="" type="text/javascript" src="/static/node_modules/jquery/dist/jquery.min.js"></script>
+  <script defer="" type="text/javascript" src="/static/node_modules/fullcalendar/dist/lib/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/fullcalendar/dist/lib/cupertino/jquery-ui.min.css">
+  
+  <!-- Bootstrap -->
+  <script defer="" type="text/javascript" src="/static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <!-- TinyMCE -->
+  <script defer="" src="/static/node_modules/tinymce/tinymce.min.js"></script>
+  <script defer="" src="/static/node_modules/tinymce/jquery.tinymce.min.js"></script>
+
+  <!-- Icon picker -->
+  <script defer="" type="text/javascript" src="/static/node_modules/@fonticonpicker/fonticonpicker/dist/js/jquery.fonticonpicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/@fonticonpicker/fonticonpicker/dist/css/base/jquery.fonticonpicker.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/@fonticonpicker/fonticonpicker/dist/css/themes/grey-theme/jquery.fonticonpicker.grey.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/@fonticonpicker/fonticonpicker/dist/css/themes/bootstrap-theme/jquery.fonticonpicker.bootstrap.min.css">
+
+  <!-- Colour selector -->
+  <script defer="" type="text/javascript" src="/static/node_modules/bootstrap-colorselector/dist/bootstrap-colorselector.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap-colorselector/dist/bootstrap-colorselector.min.css">
+
+  <!-- Sweet Alert 2 -->
+  <script defer="" type="text/javascript" src="/static/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/sweetalert2/dist/sweetalert2.min.css">
+
+  <!-- Font awesome icons -->
+  <link rel="stylesheet" href="/static/node_modules/font-awesome/css/font-awesome.min.css">
+
+  <!-- Bootstrap select -->
+  <script defer="" type="text/javascript" src="/static/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
+
+  <!-- Webpage styling -->
+  <link rel="stylesheet" type="text/css" href="/static/css/mainStyles.css">
+
+    <!-- Javascript Optimiser Pong -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/stationdata.js?{% now "U" %}"></script>
+  <script type="text/javascript" src="/static/js/Optimizer.js?{% now "U" %}"></script>
+  
+  <style>
+  .badge-secondary {
+		color: #fff;
+		background-color: #6c757d;
+	}
+	/* HIDE RADIO */
+	[type=radio] {
+	  position: absolute;
+	  opacity: 0;
+	  width: 0;
+	  height: 0;
+	}
+
+	/* IMAGE STYLES */
+	[type=radio] + img {
+	  cursor: pointer;
+	}
+
+	/* CHECKED STYLES */
+	[type=radio]:checked + img {
+	  outline: 2px solid #0275d8;
+	}
+	label {
+		padding:3px;
+	}
+	body::after {
+	  content: "";
+	  background: url(/static/img/4crop.jpg);
+	  background-size: cover;
+	  opacity: 0.2;
+	  top: 0;
+	  left: 0;
+	  bottom: 0;
+	  right: 0;
+	  position: absolute;
+	  z-index: -1;
+	}
+
+	.modal {
+        display:    none;
+        position:   fixed;
+        z-index:    1000;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      100%;
+        background: rgba( 255, 255, 255, .8 )
+                    url('http://sampsonresume.com/labs/pIkfp.gif')
+                    50% 50%
+                    no-repeat;
+    }
+
+    /* When the body has the loading class, we turn
+       the scrollbar off with overflow:hidden */
+    body.loading {
+        overflow: hidden;
+    }
+
+    /* Anytime the body has the loading class, our
+       modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }
+  </style>
+  <script type="text/javascript">
+
+    //$body.addClass("loading");
+    //$body.removeClass("loading");
+
+	var cardsByCategory = {
+		A: ["AMEX-Krisflyer", "AMEX-Krisflyer-Ascend", "AMEX-Krisflyer-Capitacard"],
+		B: ["Citibank-Cashback", "Citibank-Rewards", "Citibank-SMRT"],
+		C: ["DBS-Esso"],
+		D: ["HSBC-Advance","HSBC-Revolution","HSBC-Visa-Infinite","HSBC-Visa-Platinium"],
+		E: ["Maybank-Family-and-Friends","Maybank-World-Mastercard"],
+		F: ["OCBC-365","OCBC-Cashflo","OCBC-Plus!","OCBC-Titanium-Rewards"],
+		G: ["POSB-Everday"],
+		H: ["Standard-Chartered-Platinium-Visa-Mastercard","Standard-Chartered-Spree","Standard-Chartered-Unlimited-Cashback","Standard-Chartered-Visa-Infinite"],
+		I: ["UOB-One","UOB-Preferred-Platinium","UOB-YOLO"],
+		J: [""]
+
+	};
+
+	var vPetrolBrand = "";
+
+    function changecat(value) {
+        if (value.length == 0) document.getElementById("category").innerHTML = "<option></option>";
+        else {
+            var catOptions = "";
+            for (categoryId in cardsByCategory[value]) {
+                catOptions += "<option value='"+cardsByCategory[value][categoryId]+"'>" + cardsByCategory[value][categoryId] + "</option>";
+            }
+            document.getElementById("category").innerHTML = catOptions;
+        }
+    }
+
+    function sleep(miliseconds) {
+        var currentTime = new Date().getTime();
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+    }
+
+    function spinner() {
+        var x = document.getElementById("myBody");
+
+        name = "loading";
+        arr = x.className.split(" ");
+        if (arr.indexOf(name) == -1) {
+            x.className += " " + name;
+        }
+    }
+
+
+    function getPetrolBrand1(data) {
+
+        spinner();
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/petrol", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.send('cc='+data);
+        xhr.onload = function() {
+          document.getElementById("petrolBrand").value = this.responseText;
+          vPetrolBrand = this.responseText;
+          myFunction(vPetrolBrand);
+          getSoln();
+        }
+    }
+
+    function getPetrolBrand2(data) {
+
+        spinner();
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/petrol", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.send('cc='+data);
+        xhr.onload = function() {
+          document.getElementById("petrolBrand").value = this.responseText;
+          vPetrolBrand = this.responseText;
+          document.getElementById('form-route').submit();
+        }
+    }
+	</script>
+
+
+</head>
+<body id="myBody">
+
+
+  <div class="container-fluid">
+    <div class="row px-3" style="width: 80%; margin: auto;">
+		<h2><b>FIND ME A PETROL STATION ALONG THE WAY</b></h2>
+	</div>
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<h5>CHOOSE CREDIT CARD</h5>
+	</div>
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<small>to look for discounts on the available petrol station brands</small>
+	</div>
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<label>
+		  <input type="radio" name="cc" value="AMEX-" onclick="changecat('A');">
+		  <img src="/static/img/amex.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="Citibank-" onclick="changecat('B');">
+		  <img src="/static/img/citi.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="DBS-" onclick="changecat('C');">
+		  <img src="/static/img/dbs.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="HSBC-" onclick="changecat('D');">
+		  <img src="/static/img/hsbc.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="Maybank-" onclick="changecat('E');">
+		  <img src="/static/img/maybank.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="OCBC-" onclick="changecat('F');">
+		  <img src="/static/img/ocbc.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="POSB-" onclick="changecat('G');">
+		  <img src="/static/img/posb.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="Standard-Chartered-" onclick="changecat('H');">
+		  <img src="/static/img/stanchart.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="UOB-" onclick="changecat('I');">
+		  <img src="/static/img/uob.jpg" width="100px" height="100px">
+		</label>
+		<label>
+		  <input type="radio" name="cc" value="None" onclick="changecat('J');">
+		  <img src="/static/img/none.jpg" width="100px" height="100px">
+		</label>
+
+	</div>
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<select name="category" id="category">
+			<option value="" disabled selected></option>
+		</select>
+
+	</div>
+
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<h4>SELECT YOUR DESTINATIONS</h4>
+	</div>
+	<div class="row px-3" style="width: 80%;  margin: auto;">
+		<small>Please enter valid postal codes.  You can indicate up to 10 destinations.</small>
+	</div>
+
+
+    <div class="row" style="width: 80%; margin: auto;">
+      <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
+        <div class="ui-widget ui-helper-reset" role="tablist">
+          <h3 class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons" role="tab" id="ui-id-2" aria-controls="ui-id-3" style="display:none" aria-selected="true" aria-expanded="true" tabindex="0">Markers</h3>
+		  <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active p-4" style="height: 446px; overflow: auto;" id="ui-id-3" aria-labelledby="ui-id-2" role="tabpanel" aria-hidden="false">
+            <form id="form-route" action="/api/route" method="post">
+              <div class="form-group">
+                <div class="input-group">
+                  <input id="location" class="form-control ui-autocomplete-input" type="text" placeholder="Find Your Place" autocomplete="off">
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <!--<i class="fa fa-search"></i>-->
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            <hr>
+            <h6 id="markerNo"></h6>
+            <div class="col-sm-12" style="display:flex; padding: 0px; margin: 10px 0px 10px 0px; overflow-y: auto">
+              <ul id="placesList" class="list-group"><div>No markers added<br><br>Type a location in the search bar and select one from the dropdown list<br><br>Marker-to-marker routing can be enabled when there is more than 1 marker present</div></ul>
+            </div>
+            <button style="margin-bottom: 10px; width: 100%; display: none;" type="button" id="removeAllMarker" class="btn btn-danger">
+              <i class="fa fa-trash"></i> Clear All Markers
+            </button>
+
+			<button style="margin-bottom: 10px; width: 100%; display:none" type="submit" class="btn" onclick="document.getElementById('form-route').submit();">
+              Find my Route
+            </button>
+                <input type="hidden" id="wayPts" name="wayPts" value=" ">
+                <input type="hidden" id="petrolBrand" id="petrolBrand" value="">
+            </form>
+          </div>
+		  
+		  
+          <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-4" aria-controls="ui-id-5" aria-selected="false" aria-expanded="false" tabindex="-1" style="display:none"><span class="ui-accordion-header-icon ui-icon fa-angle-right"></span>More options</h3>
+          <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" style="display: none; height: 446px; overflow: auto;" id="ui-id-5" aria-labelledby="ui-id-4" role="tabpanel" aria-hidden="true">
+            <form id="form" class="was-validated">
+              <label for="mapDesign">Map Design</label>
+              <div class="form-group">
+                <select id="mapDesign" class="custom-select">
+                  <option value="Default" selected="selected">Default</option>
+                  <option value="Night">Night</option>
+                  <option value="Grey">Grey</option>
+                  <option value="Original">Original</option>
+                  <option value="LandLot">Land Lot</option>
+                </select>
+              </div>
+
+              <label for="zoom">Zoom Level</label>
+              <div class="form-group">
+                <select id="zoom" class="custom-select" data-toggle="tooltip" data-placement="bottom" title="" disabled="" data-original-title="Disabled: More than 1 marker present">
+                  <option>11</option>
+                  <option>12</option>
+                  <option selected="selected">13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="heightInput">Height (Min: 200, Max: 1080)</label>
+                <div class="input-group">
+                  <input type="number" min="200" max="1080" step="0.1" class="form-control" id="heightInput" value="450" required="">
+                  <div class="invalid-tooltip">Please provide a valid height:<br>Accepted values between 200 and 1080</div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">px</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="widthInput">Width (Min: 200, Max: 1920)</label>
+                <div class="input-group">
+                  <input type="number" min="200" max="1920" step="0.1" class="form-control" id="widthInput" value="450" required="">
+                  <div class="invalid-tooltip">Please provide a valid width:<br>Accepted values between 200 and 1920</div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">px</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="popupInput">Global Popup Width (Min: 200)</label>
+                <div class="input-group">
+                  <input type="number" min="200" step="0.1" class="form-control" id="popupInput" value="200" required="">
+                  <div class="invalid-tooltip">Please provide a valid popup width:<br>Minimum value is 200</div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">px</span>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9">
+        <div class="row">
+          <div class="col-sm-12">
+			<div id="mapdiv"><iframe src="amm?zoomLevl=13&amp;popupWidth=200&amp;popupHeight=500" scrolling="no" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:none;">
+      <button id="optimise_btn"  onclick="getPetrolBrand(document.getElementById('category').value); myFunction(document.getElementById('petrolBrand').value); getSoln();">Optimise</button>
+    </div>
+    <div class="test" style="display:none;">
+      <span id="status"></span>
+    </div>
+
+    <div class="row px-3" style="width: 80%; margin: auto;">
+		<small>Except the first(start) and last(end) points, the middle points can be fixed or otherwise. Please select at least 2 points.</small>
+	</div>
+	<div class="row px-3" style="width: 80%; margin: auto;">
+		<div class="btn btn-primary" onclick="spinner();getPetrolBrand1(document.getElementById('category').value); ">My route is fixed</div>&nbsp;<div class="btn btn-primary" onclick="spinner();getPetrolBrand2(document.getElementById('category').value); ">No fixed order</div>
+	</div>
+  </div>
+				
+  <script defer="" type="text/javascript" src="/static/js/index.js"></script>
+
+  
+
+<ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul><div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div>
+<div class="modal"></div>
+</body></html>

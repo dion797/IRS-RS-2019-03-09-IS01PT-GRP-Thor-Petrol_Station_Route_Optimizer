@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Waypoints in Directions</title>
+    <style>
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+      #right-panel {
+        margin: 20px;
+        border-width: 2px;
+        width: 20%;
+        height: 100%;
+        float: left;
+        text-align: left;
+        padding-top: 0;
+      }
+      #directions-panel {
+        margin-top: 10px;
+        background-color: #FFEE77;
+        padding: 10px;
+        overflow: scroll;
+        height: 174px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="right-panel">
+    <div>
+      <input type="submit" id="submit" style="display:none">
+    </div>
+    <div id="directions-panel" style="height: 100%;"></div>
+    </div>
+    <script>
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: {lat: 1.29214851229718, lng: 103.776550885502}
+        });
+        directionsDisplay.setMap(map);
+
+        //document.getElementById('submit').addEventListener('click', function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        //});
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var waypts = [];
+        var checkboxArray = document.getElementById('waypoints');
+        /**for (var i = 0; i < checkboxArray.length; i++) {
+          if (checkboxArray.options[i].selected) {
+            waypts.push({
+              location: checkboxArray[i].value,
+              stopover: true
+            });
+          }
+        }**/
+        var urlParams = new URLSearchParams(window.location.search);
+        var foo = urlParams.get('foo');
+        if (foo!=null) {var resultWayPoint = JSON.parse(foo) || [];}
+        else { var resultWayPoint = JSON.parse(localStorage.getItem("resultWayPoint")) || [];}
+        var destination1 = new google.maps.LatLng( resultWayPoint[0].x ,resultWayPoint[0].y);
+        destinationStt = destination1;
+        for(var i=1; i<resultWayPoint.length-1; i++) {
+          destination1 = new google.maps.LatLng( resultWayPoint[i].x ,resultWayPoint[i].y);
+          waypts.push({location: destination1,  stopover: true});
+        }
+        destination1 = new google.maps.LatLng( resultWayPoint[resultWayPoint.length-1].x ,resultWayPoint[resultWayPoint.length-1].y);
+        destinationEnd = destination1;
+
+        directionsService.route({
+		  origin: destinationStt,
+		  destination: destinationEnd,
+          waypoints: waypts,
+          optimizeWaypoints: false,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '<b>Recommended route<b><br>';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+              var routeSegment = i + 1;
+              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                  '</b><br>';
+              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+            }
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtCNQx5wx8QmKYkIwMxqeWiUEUpcbpfZ4&callback=initMap">
+    </script>
+  </body>
+</html>
