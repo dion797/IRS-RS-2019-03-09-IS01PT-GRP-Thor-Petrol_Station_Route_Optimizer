@@ -60,7 +60,7 @@ Our team had an exciting time working on this project and hope to share our insi
 ### [ 2 ] To run the system in other/local machine:
 ### Install additional necessary libraries. This application works in python 2 only.
 
-> $ sudo apt-get install python-clips clips build-essential python-dev python-pip python-django 
+> $ sudo apt-get install python-clips clips build-essential python-dev python-pip python-django python-tk
 
 > $ pip install pyclips 
 
