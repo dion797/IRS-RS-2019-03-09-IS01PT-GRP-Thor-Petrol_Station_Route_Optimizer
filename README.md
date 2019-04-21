@@ -67,6 +67,8 @@ Our team had an exciting time working on this project and hope to share our insi
 > $ pip install numpy
 
 > $ pip install pandas
+
+> $ pip install matplotlib
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
 
