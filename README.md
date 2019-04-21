@@ -28,7 +28,7 @@ Our team had an exciting time working on this project and hope to share our insi
 ---
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
-[![Power Supplier Recommender](https://i9.ytimg.com/vi/poQ_v2iFA_I/mq2.jpg?sqp=CMSE6-UF&rs=AOn4CLBeSapE255yygAAE0yus6lXOzFqYQ)](https://youtu.be/poQ_v2iFA_I "Petrol Station Route Optimizer")
+[![Petrol Station Route Optimizer](https://i9.ytimg.com/vi/poQ_v2iFA_I/mq2.jpg?sqp=CLTs8eUF&rs=AOn4CLAMbD8fotccakaTQQfSRtivg6dFNg](https://youtu.be/poQ_v2iFA_I "Petrol Station Route Optimizer")
 
 ---
 ## SECTION 5 : USER GUIDE
